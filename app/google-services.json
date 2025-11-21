@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "637235051777",
+    "project_id": "chickhealth-bb6fd",
+    "storage_bucket": "chickhealth-bb6fd.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:637235051777:android:128546be3bc5fcba5a6f00",
+        "android_client_info": {
+          "package_name": "com.helathchickapp.chickhealth"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnPxmlS66ETUYwTwRYbWc1i1N6QtqX0gc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

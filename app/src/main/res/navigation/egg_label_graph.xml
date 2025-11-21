@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/egg_label_graph.xml"
+    app:startDestination="@id/eggLabelLoadFragment">
+
+    <fragment
+        android:id="@+id/eggLabelLoadFragment"
+        android:name="com.helathchickapp.chickhealth.sr.pres.ui.ChickHealthLoadFragment"
+        android:label="EggLabelLoadFragment" >
+        <action
+            android:id="@+id/action_eggLabelLoadFragment_to_eggLabelV"
+            app:destination="@id/eggLabelV" />
+    </fragment>
+    <fragment
+        android:id="@+id/eggLabelV"
+        android:name="com.helathchickapp.chickhealth.sr.pres.views.ChickHealthV"
+        android:label="EggLabelV" />
+</navigation>
