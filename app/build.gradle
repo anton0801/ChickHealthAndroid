@@ -46,28 +46,26 @@ android {
 
     signingConfigs {
         release {
-            def isCI = System.getenv("CI") == "true"
-            if (isCI) {
-                def keystorePath     = System.getenv("CM_KEYSTORE_PATH")
-                def keystorePassword = System.getenv("CM_KEYSTORE_PASSWORD")
-                def keyAlias         = System.getenv("CM_KEY_ALIAS")
-                def keyPassword      = System.getenv("CM_KEY_PASSWORD")
+            // Это сработает и локально, и в CI
+            def isCI = "true".equals(System.getenv("CI"))
 
+            if (isCI) {
+                def keystorePath = System.getenv("CM_KEYSTORE_PATH")
                 if (!keystorePath) {
-                    throw new GradleException("CM_KEYSTORE_PATH is not set!")
+                    throw new GradleException("CM_KEYSTORE_PATH is not set in CI!")
                 }
 
                 storeFile file(keystorePath)
-                storePassword keystorePassword
-                this.keyAlias keyAlias
-                this.keyPassword keyPassword
+                storePassword System.getenv("CM_KEYSTORE_PASSWORD")
+                keyAlias System.getenv("CM_KEY_ALIAS")
+                keyPassword System.getenv("CM_KEY_PASSWORD")
             }
         }
     }
 
     buildTypes {
         release {
-            signingConfig = signingConfigs.getByName("release")
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
