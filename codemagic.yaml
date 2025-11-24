@@ -3,7 +3,7 @@ workflows:
     name: Android release workflow
     environment:
       android_signing:
-        - chick_healt_keystore
+        - health_app_keystore
       vars:
         PACKAGE_NAME: "com.helathchickapp.chickhealth"
         CODENAME_SIGNING_ENABLED: "true"
