@@ -16,33 +16,11 @@ android {
         applicationId "com.helathchickapp.chickhealth"
         minSdk 24
         targetSdk 36
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "2.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-
-//    signingConfigs {
-//        register("release") {
-//            def isCI = System.getenv("CI") == "true"
-//
-//            if (isCI) {
-//                def keystorePath = System.getenv("CM_KEYSTORE_PATH")
-//                def keystorePassword = System.getenv("CM_KEYSTORE_PASSWORD")
-//                def keyAlias = System.getenv("CM_KEY_ALIAS")
-//                def keyPassword = System.getenv("CM_KEY_PASSWORD")
-//
-//                if (!keystorePath) {
-//                    throw new GradleException("CM_KEYSTORE_PATH is not set!")
-//                }
-//
-//                storeFile = file(keystorePath)
-//                storePassword = keystorePassword
-//                keyAlias = keyAlias
-//                keyPassword = keyPassword
-//            }
-//        }
-//    }
 
     signingConfigs {
         release {
