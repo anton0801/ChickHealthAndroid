@@ -15,6 +15,7 @@ class ChickHealthPushToken {
                     continuation.resume(it.result)
                     Log.d(ChickHealtApp.CHICK_HEALTH_MAIN_TAG, "Token error: ${it.exception}")
                 } else {
+                    Log.d(ChickHealtApp.CHICK_HEALTH_MAIN_TAG, "Token success: ${it.result}")
                     continuation.resume(it.result)
                 }
             }
