@@ -8,11 +8,11 @@ import android.content.Intent
 import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import androidx.core.graphics.drawable.IconCompat
+import androidx.core.graphics.drawable.toBitmap
 import androidx.core.os.bundleOf
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import kotlin.collections.contains
-
 
 
 class ChickHealthPushService : FirebaseMessagingService() {
@@ -67,13 +67,13 @@ class ChickHealthPushService : FirebaseMessagingService() {
             this,
             0,
             eggLabelIntent,
-            PendingIntent.FLAG_UPDATE_CURRENT
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
         )
 
         val eggLabelNotification = NotificationCompat.Builder(this, CHICK_HEALTH_CHANNEL_ID)
             .setContentTitle(title)
             .setContentText(message)
-            .setSmallIcon(R.drawable.ic_launcher_background)
+            .setSmallIcon(R.drawable.ic_notifications_icon)
             .setAutoCancel(true)
             .setContentIntent(eggLabelPendingIntent)
             .build()

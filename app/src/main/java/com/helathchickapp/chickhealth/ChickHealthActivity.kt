@@ -5,16 +5,27 @@ import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.webkit.WebView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updateLayoutParams
+import androidx.lifecycle.lifecycleScope
+import com.appsflyer.AppsFlyerLib
+import com.google.android.gms.ads.identifier.AdvertisingIdClient
 import com.helathchickapp.chickhealth.databinding.ActivityChickHealthBinding
 import com.helathchickapp.chickhealth.sr.handlers.ChickHealthPushHandler
 import com.helathchickapp.chickhealth.sr.layout.ChickHealthGlobalLayoutUtil
 import com.helathchickapp.chickhealth.sr.layout.chickHealthSetupSystemBars
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.inject
+
+object ObjectsVar {
+    var ua: String = ""
+}
 
 class ChickHealthActivity : AppCompatActivity() {
 
@@ -30,6 +41,9 @@ class ChickHealthActivity : AppCompatActivity() {
 
         binding = ActivityChickHealthBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val ua = WebView(this).settings.userAgentString
+        ObjectsVar.ua = ua
 
         val eggLabelRootView = findViewById<View>(android.R.id.content)
         ChickHealthGlobalLayoutUtil().chickHealthAssistActivity(this)
@@ -65,12 +79,19 @@ class ChickHealthActivity : AppCompatActivity() {
                 }
             }
 
-
-
             WindowInsetsCompat.CONSUMED
         }
         Log.d(ChickHealtApp.CHICK_HEALTH_MAIN_TAG, "Activity onCreate()")
         eggLabelPushHandler.chickHealthHandlePush(intent.extras)
+
+
+    }
+
+    suspend fun eggLabelGetGaid(): String = withContext(Dispatchers.IO) {
+        val gaid = AdvertisingIdClient.getAdvertisingIdInfo(this@ChickHealthActivity).id
+            ?: "00000000-0000-0000-0000-000000000000"
+        Log.d(ChickHealtApp.CHICK_HEALTH_MAIN_TAG, "Gaid: $gaid")
+        return@withContext gaid
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
@@ -79,7 +100,7 @@ class ChickHealthActivity : AppCompatActivity() {
             chickHealthSetupSystemBars()
         }
     }
-
+    
     override fun onResume() {
         super.onResume()
         chickHealthSetupSystemBars()

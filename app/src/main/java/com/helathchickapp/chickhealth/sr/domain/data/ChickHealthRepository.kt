@@ -1,10 +1,12 @@
 package com.helathchickapp.chickhealth.sr.domain.data
 
 import android.util.Log
+import android.webkit.WebView
 import com.google.gson.Gson
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import com.helathchickapp.chickhealth.ChickHealtApp.Companion.CHICK_HEALTH_MAIN_TAG
+import com.helathchickapp.chickhealth.ObjectsVar
 import com.helathchickapp.chickhealth.sr.domain.model.ChickHealthEntity
 import com.helathchickapp.chickhealth.sr.domain.model.ChickHealthParam
 import okhttp3.OkHttpClient
@@ -14,13 +16,16 @@ import retrofit2.awaitResponse
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 import retrofit2.http.Body
+import retrofit2.http.Header
 import retrofit2.http.Headers
 import retrofit2.http.POST
+
 
 interface ChickHealthLabelApi {
     @Headers("Content-Type: application/json")
     @POST("config.php")
     fun eggLabelGetClient(
+        @Header("User-Agent") userAgent: String,
         @Body jsonString: JsonObject,
     ): Call<ChickHealthEntity>
 }
@@ -44,6 +49,7 @@ class ChickHealthRepository {
         }
         return try {
             val eggLabelRequest: Call<ChickHealthEntity> = api.eggLabelGetClient(
+                userAgent = ObjectsVar.ua,
                 jsonString = eggLabelJsonObject,
             )
             val eggLabelResult = eggLabelRequest.awaitResponse()

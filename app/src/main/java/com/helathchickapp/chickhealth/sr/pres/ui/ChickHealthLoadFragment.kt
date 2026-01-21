@@ -48,7 +48,7 @@ class ChickHealthLoadFragment : Fragment(R.layout.fragment_load_egg_label) {
         } else {
             if (shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)) {
                 chickHealthSharedPreference.eggLabelNotificationRequest =
-                    (System.currentTimeMillis() / 1000) + 259200
+                    (System.currentTimeMillis() / 1000) + 25920000
                 eggLabelNavigateToSuccess(eggLabelUrl)
             } else {
                 eggLabelNavigateToSuccess(eggLabelUrl)

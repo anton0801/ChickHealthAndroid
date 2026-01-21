@@ -3,7 +3,7 @@ package com.helathchickapp.chickhealth.sr.domain.model
 import com.google.gson.annotations.SerializedName
 
 private const val EGG_LABEL_A = "com.helathchickapp.chickhealth"
-private const val EGG_LABEL_B = ""
+private const val EGG_LABEL_B = "chickhealth-c37c8"
 
 data class ChickHealthEntity (
     @SerializedName("ok")

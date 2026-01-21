@@ -110,6 +110,7 @@ class ChickHealthLoadViewModel(
 
 
     private suspend fun eggLabelGetData(conversation: MutableMap<String, Any>?) {
+        Log.d("EggLabelMainTag", "eggLabelGetData: conversion data $conversation")
         val eggLabelData = chickHealthGetAllUseCase.invoke(conversation)
         if (chickHealthSharedPreference.eggLabelAppState == 0) {
             if (eggLabelData == null) {
